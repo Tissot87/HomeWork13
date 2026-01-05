@@ -7,8 +7,13 @@ public abstract class Product implements Searchable {
     private final String name;
 
 
-    public Product(String name) {
+    public Product(String name) throws IllegalArgumentException{
+
         this.name = name;
+        if (name == null || name.isBlank()){
+            throw new IllegalArgumentException();
+        }
+
 
     }
 
@@ -29,4 +34,8 @@ public abstract class Product implements Searchable {
     public String contentType() {
         return "PRODUCT";
     }
+
+
+
+
 }
