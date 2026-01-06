@@ -49,6 +49,10 @@ public class SearchEngine {
         int maxMatches = 0;
 
         for (Searchable s: searchingItems){
+
+            if (s == null){
+                continue;
+            }
             String str = s.searchTerm();
             String substring = search;
             int count = 0;
