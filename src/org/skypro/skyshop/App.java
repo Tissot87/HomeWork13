@@ -8,7 +8,6 @@ import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
-import org.skypro.skyshop.search.Searchable;
 
 import java.util.Arrays;
 
@@ -20,7 +19,7 @@ public class App {
 
         Product product1 = null;
         try {
-            product1 = new SimpleProduct("Honey", 100);
+            product1 = new SimpleProduct("Salt", 100);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
@@ -32,7 +31,6 @@ public class App {
             System.out.println("Caught");
         }
 
-        System.out.println(product2);
 
         Product product3 = null;
         try {
@@ -46,8 +44,6 @@ public class App {
         basket.addProduct(product2);
         basket.addProduct(product3);
 
-
-
         Article article1 = new Article("Potato", "Text1");
 
         Article article2 = new Article("Text", "Milk");
@@ -55,8 +51,9 @@ public class App {
         Article article4 = new Article("Text", "Text4");
         Article article5 = new Article("Text", "Text5");
 
+        System.out.println(basket);
 
-        SearchEngine a = new SearchEngine(7);
+        SearchEngine a = new SearchEngine();
         a.add(product1);
         a.add(product2);
         a.add(product3);
@@ -67,19 +64,16 @@ public class App {
         a.add(article5);
 
 
-
-        System.out.println(Arrays.toString(a.search("Potato")));
-        System.out.println(Arrays.toString(a.search("Milk")));
-        System.out.println(Arrays.toString(a.search("Honey")));
-
-
         try {
-            System.out.println(a.findBest("nnn"));
+            System.out.println(a.findBest("Honey"));
         } catch (BestResultNotFound e) {
             System.out.println(e);
         }
 
-        //      basket.printBasket();
+
+        basket.clearing("Potato");
+
+        System.out.println(a.search("Potato"));
 
 
     }

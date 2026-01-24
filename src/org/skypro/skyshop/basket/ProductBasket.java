@@ -2,26 +2,33 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class ProductBasket {
 
-     Product[] basket = new Product[5];
+     List<Product> basket = new ArrayList<>();
 
      int totalSum = 0;
 
 
 
     public  void addProduct(Product product){
-        for (int i = 0; i < basket.length; i++) {
 
-            if (basket[i] == null) {
-                basket[i] = product;
-                break;
-
-            } else if (i == basket.length-1){System.out.println("Невозможно добавить продукт");
-
-            }
-        }
-    }
+        basket.add(product);
+//        for (int i = 0; i < basket.length; i++) {
+//
+//            if (basket.get(i) == null) {
+//                basket[i] = product;
+//                break;
+//
+//            } else if (i == basket.length-1){System.out.println("Невозможно добавить продукт");
+//
+//            }
+//        }
+   }
 
 
     public  int calculationTotalSum(){
@@ -60,12 +67,24 @@ public class ProductBasket {
         return false;
     }
 
-    public  void clear(){
-        for (int i = 0; i < basket.length; i++){
-             basket[i] = null;
-             totalSum = 0;
+    public  List<Product> clearing(String name){
+
+        List<Product> listOfDeletedProducts = new LinkedList<>();
+
+        Iterator<Product> clearBasketIterator = basket.iterator();
+
+        while (clearBasketIterator.hasNext()){
+             Product clearingProduct = clearBasketIterator.next();
+             if (clearingProduct.getName().equals(name)){
+                 clearBasketIterator.remove();
+                 listOfDeletedProducts.add(clearingProduct);
+             }
         }
+
+        return listOfDeletedProducts;
     }
+
+
 
     public int countSpecialProducts(){
         int countSpecialProducts = 0;
@@ -77,5 +96,12 @@ public class ProductBasket {
             }
         }
         return countSpecialProducts;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductBasket{" +
+                "basket=" + basket +
+                '}';
     }
 }
