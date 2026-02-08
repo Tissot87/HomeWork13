@@ -4,9 +4,16 @@ public class SimpleProduct extends Product{
 
    int cost;
 
-    public SimpleProduct(String name, int cost) {
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    public SimpleProduct(String name, int cost) throws IllegalArgumentException {
         super(name);
-        this.cost = cost;
+        if ((this.cost = cost) < 1){
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -23,4 +30,6 @@ public class SimpleProduct extends Product{
     public String toString() {
         return getName() + ":" + getCost();
     }
+
+
 }
