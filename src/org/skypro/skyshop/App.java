@@ -71,9 +71,10 @@ public class App {
         }
 
 
-        basket.clearing("Potato");
+        System.out.println(basket.clearing("Potato"));
 
-        System.out.println(a.search("Potato"));
+        System.out.println(a.search("Honey"));
+
 
 
     }

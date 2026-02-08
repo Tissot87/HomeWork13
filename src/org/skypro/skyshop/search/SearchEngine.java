@@ -1,29 +1,35 @@
 package org.skypro.skyshop.search;
 
 import org.skypro.skyshop.exception.BestResultNotFound;
-import org.skypro.skyshop.product.Product;
 
 import java.util.*;
 
 public class SearchEngine {
-//создали список для поиска
+
     List<Searchable> searchingItems = new ArrayList<>();
 
-//нужно сделать списки и итераторы для каждого класса и реализовать действия классов !!!каждого!!!
-    public List<Searchable> search(String searchTerm){
-        List<Searchable> resultList = new LinkedList<>();
-        int countItems = 0;
-        Iterator<Searchable> searchItemsIterator = searchingItems.iterator();
-        while (searchItemsIterator.hasNext()){
-            Searchable searchingItem = searchItemsIterator.next();
-            if (searchingItem != null && searchingItem.searchTerm().contains(searchTerm)){
-                resultList.add(searchingItem);
-                countItems++;
-            }
-            if (countItems == 4){
-                break;
+
+    public Map<String, Searchable> search(String searchTerm){
+        Map<String, Searchable> resultList = new TreeMap<>();
+        for (Searchable s : searchingItems) {
+            System.out.println("    ");
+            if (s != null && s.searchTerm().contains(searchTerm)) {
+                resultList.put(s.searchTerm(), s);
+
             }
         }
+//        int countItems = 0;
+//        Iterator<Searchable> searchItemsIterator = searchingItems.iterator();
+//        while (searchItemsIterator.hasNext()){
+//            Searchable searchingItem = searchItemsIterator.next();
+//            if (searchingItem != null && searchingItem.searchTerm().contains(searchTerm)){
+//                resultList.put(searchingItem, searchingItem);
+//                countItems++;
+//            }
+//            if (countItems == 4){
+//                break;
+//            }
+//        }
         return resultList;
     }
 

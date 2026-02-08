@@ -4,6 +4,11 @@ public class SimpleProduct extends Product{
 
    int cost;
 
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
     public SimpleProduct(String name, int cost) throws IllegalArgumentException {
         super(name);
         if ((this.cost = cost) < 1){

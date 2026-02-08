@@ -6,6 +6,11 @@ public class DiscountedProduct extends Product{
 
     int discount;
 
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
     public DiscountedProduct(String name, int baseCost, int discount) throws IllegalArgumentException {
         super(name);
         if ((this.baseCost = baseCost) < 1){
