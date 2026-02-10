@@ -1,19 +1,12 @@
 package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.search.Searchable;
 
 import java.util.*;
 
 public class ProductBasket {
 
-
-
-     HashMap<String, List<Product>> mapOfProducts = new HashMap<>();
-
-     int totalSum = 0;
-
-
+     Map<String, List<Product>> mapOfProducts = new HashMap<>();
 
     public  void addProduct(Product product){
 
@@ -23,8 +16,9 @@ public class ProductBasket {
 
    }
 
-
     public  int calculationTotalSum(){
+
+        int totalSum = 0;
 
         for (List<Product> listOfProduct : mapOfProducts.values()){
            for (Product product1 : listOfProduct)
@@ -46,8 +40,7 @@ public class ProductBasket {
             }
         }else System.out.println("В корзине пусто");
 
-        calculationTotalSum();
-        System.out.println("Итого: " + totalSum);
+        System.out.println("Итого: " + calculationTotalSum());
         System.out.println("Специальных товаров: " + countSpecialProducts());
     }
 
@@ -56,7 +49,8 @@ public class ProductBasket {
             for (Product product1 : inBasketProduct)
                if(inBasketProduct != null){
                     if (product1.getName().equals(product)) {
-                    }return true;
+                    return true;
+                    }
                }
         }
         return false;
@@ -69,25 +63,10 @@ public class ProductBasket {
         if (mapOfProducts.containsKey(name)){
             listOfDeletedProducts.addAll(mapOfProducts.get(name));
             mapOfProducts.remove(name);
-
-
         }
-//
-//            Iterator<Product> clearBasketIterator = products.iterator();
-//
-//            while (clearBasketIterator.hasNext()) {
-//                Product clearingProduct = clearBasketIterator.next();
-//                if (clearingProduct.getName().equals(name)) {
-//                    clearBasketIterator.remove();
-//                    listOfDeletedProducts.add(clearingProduct);
-//                }
-//            }
-//        }
 
         return listOfDeletedProducts;
     }
-
-
 
     public int countSpecialProducts(){
         int countSpecialProducts = 0;

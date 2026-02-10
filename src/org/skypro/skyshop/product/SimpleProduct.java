@@ -1,5 +1,7 @@
 package org.skypro.skyshop.product;
 
+import java.util.Objects;
+
 public class SimpleProduct extends Product{
 
    int cost;
@@ -32,4 +34,8 @@ public class SimpleProduct extends Product{
     }
 
 
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

@@ -1,5 +1,7 @@
 package org.skypro.skyshop.product;
 
+import java.util.Objects;
+
 public class DiscountedProduct extends Product{
 
     int baseCost;
@@ -37,5 +39,11 @@ public class DiscountedProduct extends Product{
     @Override
     public boolean isSpecial() {
         return true;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

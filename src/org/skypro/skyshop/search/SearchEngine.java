@@ -9,12 +9,14 @@ public class SearchEngine {
     List<Searchable> searchingItems = new ArrayList<>();
 
 
-    public Map<String, Searchable> search(String searchTerm){
-        Map<String, Searchable> resultList = new TreeMap<>();
+
+
+    public Set<Searchable> search(String searchTerm) {
+        Set<Searchable> resultList = new TreeSet<>();
         for (Searchable s : searchingItems) {
             System.out.println("    ");
             if (s != null && s.searchTerm().contains(searchTerm)) {
-                resultList.put(s.searchTerm(), s);
+                resultList.add(s);
 
             }
         }

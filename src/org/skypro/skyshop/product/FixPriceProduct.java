@@ -27,4 +27,10 @@ public class FixPriceProduct extends Product{
     public boolean isSpecial() {
         return true;
     }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

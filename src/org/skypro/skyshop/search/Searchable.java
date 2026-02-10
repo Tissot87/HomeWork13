@@ -1,6 +1,6 @@
 package org.skypro.skyshop.search;
 
-public interface Searchable {
+public interface Searchable extends Comparable {
 
     String searchTerm();
 
@@ -9,5 +9,6 @@ public interface Searchable {
     default String getStringRepresentation(){
         return this.searchTerm() + " - " + this.contentType();
     }
+
 
 }
