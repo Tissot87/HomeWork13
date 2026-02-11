@@ -6,17 +6,17 @@ import java.util.*;
 
 public class SearchEngine {
 
-    List<Searchable> searchingItems = new ArrayList<>();
+   private Set<Searchable> searchingItems = new HashSet<>();
 
 
 
 
-    public Set<Searchable> search(String searchTerm) {
-        Set<Searchable> resultList = new TreeSet<>();
+    public Set<String> search(String searchTerm) {
+        Set<String> resultList = new TreeSet<>(new ReverseComparator());
         for (Searchable s : searchingItems) {
             System.out.println("    ");
             if (s != null && s.searchTerm().contains(searchTerm)) {
-                resultList.add(s);
+                resultList.add(String.valueOf(s));
 
             }
         }
@@ -74,5 +74,12 @@ public class SearchEngine {
         return bestMatch;
     }
 
+    public static class ReverseComparator implements Comparator<String> {
+
+        @Override
+        public int compare(String s1, String s2) {
+            return s2.compareTo(s1);
+        }
+    }
 
 }

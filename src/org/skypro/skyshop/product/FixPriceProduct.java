@@ -33,4 +33,6 @@ public class FixPriceProduct extends Product{
     public int compareTo(Object o) {
         return 0;
     }
+
+
 }
