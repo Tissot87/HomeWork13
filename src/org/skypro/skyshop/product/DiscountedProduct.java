@@ -1,15 +1,27 @@
 package org.skypro.skyshop.product;
 
+import java.util.Objects;
+
 public class DiscountedProduct extends Product{
 
     int baseCost;
 
     int discount;
 
-    public DiscountedProduct(String name, int baseCost, int discount) {
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    public DiscountedProduct(String name, int baseCost, int discount) throws IllegalArgumentException {
         super(name);
-        this.baseCost = baseCost;
+        if ((this.baseCost = baseCost) < 1){
+            throw new IllegalArgumentException();
+        }
         this.discount = discount;
+        if (discount < 0 || discount > 100){
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -27,5 +39,11 @@ public class DiscountedProduct extends Product{
     @Override
     public boolean isSpecial() {
         return true;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
