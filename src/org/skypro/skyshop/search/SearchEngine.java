@@ -11,27 +11,15 @@ public class SearchEngine {
 
 
 
-    public Set<String> search(String searchTerm) {
-        Set<String> resultList = new TreeSet<>(new ReverseComparator());
+    public Set<Searchable> search(String searchTerm) {
+        Set<Searchable> resultList = new TreeSet<>(new ReverseComparator());
         for (Searchable s : searchingItems) {
             System.out.println("    ");
             if (s != null && s.searchTerm().contains(searchTerm)) {
-                resultList.add(String.valueOf(s));
+                resultList.add(s);
 
             }
         }
-//        int countItems = 0;
-//        Iterator<Searchable> searchItemsIterator = searchingItems.iterator();
-//        while (searchItemsIterator.hasNext()){
-//            Searchable searchingItem = searchItemsIterator.next();
-//            if (searchingItem != null && searchingItem.searchTerm().contains(searchTerm)){
-//                resultList.put(searchingItem, searchingItem);
-//                countItems++;
-//            }
-//            if (countItems == 4){
-//                break;
-//            }
-//        }
         return resultList;
     }
 
@@ -74,12 +62,19 @@ public class SearchEngine {
         return bestMatch;
     }
 
-    public static class ReverseComparator implements Comparator<String> {
+    public static class ReverseComparator implements Comparator<Searchable> {
 
         @Override
-        public int compare(String s1, String s2) {
-            return s2.compareTo(s1);
+        public int compare(Searchable o1, Searchable o2) {
+            int lengthComparison = Integer.compare(
+                    o2.searchTerm().length(),
+                    o1.searchTerm().length());
+            if (lengthComparison != 0) {
+                return lengthComparison;
+            }
+            return o1.searchTerm().compareTo(o2.searchTerm());
         }
+
     }
 
 }
