@@ -3,6 +3,7 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class ProductBasket {
 
@@ -18,42 +19,27 @@ public class ProductBasket {
 
     public  int calculationTotalSum(){
 
-        int totalSum = 0;
-
-        for (List<Product> listOfProduct : mapOfProducts.values()){
-           for (Product product1 : listOfProduct)
-            if (product1 != null) {
-                totalSum = totalSum + product1.getCost();
-            }
-        }
-        return totalSum;
+        return mapOfProducts.values()
+                 .stream()
+                 .flatMap(Collection::stream)
+                 .filter(Objects::nonNull)
+                 .mapToInt(Product::getCost)
+                .sum();
     }
 
     public  void printBasket(){
 
-        if (mapOfProducts != null) {
-            for (List<Product> listOfProduct : mapOfProducts.values()) {
-                for (Product product : listOfProduct )
-                    if (product != null) {
-                        System.out.println(product);
-                    }else continue;
-            }
-        }else System.out.println("В корзине пусто");
-
-        System.out.println("Итого: " + calculationTotalSum());
-        System.out.println("Специальных товаров: " + countSpecialProducts());
+        mapOfProducts.values()
+                .stream()
+                .forEach(i -> System.out.println(i.toString()));
     }
 
     public  boolean checkProduct(String product){
-        for (List<Product> inBasketProduct : mapOfProducts.values()){
-            for (Product product1 : inBasketProduct)
-               if(inBasketProduct != null){
-                    if (product1.getName().equals(product)) {
-                    return true;
-                    }
-               }
-        }
-        return false;
+
+       return mapOfProducts.values()
+               .stream()
+               .flatMap(Collection::stream)
+               .anyMatch(i -> i.getName().equalsIgnoreCase(product));
     }
 
     public  List<Product> clearing(String name){
@@ -68,18 +54,14 @@ public class ProductBasket {
         return listOfDeletedProducts;
     }
 
-    public int countSpecialProducts(){
-        int countSpecialProducts = 0;
-        for (List<Product> basket : mapOfProducts.values()) {
-            for (Product product : basket) {
-                if (product != null) {
-                    if (product.isSpecial()) {
-                        countSpecialProducts++;
-                    }
-                }
-            }
-        }
-        return countSpecialProducts;
+    public long countSpecialProducts(){
+
+        return mapOfProducts.values()
+                .stream()
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .filter(Product::isSpecial)
+                .count();
     }
 
     @Override

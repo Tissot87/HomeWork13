@@ -75,6 +75,9 @@ public class App {
 
         System.out.println(a.search("Potato"));
 
+        System.out.println(basket.calculationTotalSum());
+
+        System.out.println(basket.countSpecialProducts());
 
 
     }
